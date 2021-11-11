@@ -1,12 +1,13 @@
 import React from 'react';
 
 const Form = (props) => {
-    const { values, submit, change, disabled, errors } = props;
+    const { values, submit, change, disabled, errors, checked, validate } = props;
 
 
-    const onChange = (evt) => {
+    const onChange = (evt) => {  
         const { name, value, checked, type } = evt.target;
         const realValue = type === 'checkbox' ? checked : value;
+        validate(name, value);
         change(name, realValue);
     }
 
@@ -19,6 +20,10 @@ const Form = (props) => {
     return (
         <form onSubmit={onSubmit}>
             <h2>Add user</h2>
+            <p>{errors.username}</p>
+            <p>{errors.email}</p>
+            <p>{errors.password}</p>
+            <p>{errors.terms}</p>
             <label> Name 
                 <input
                     name='username'
@@ -46,7 +51,7 @@ const Form = (props) => {
             <label> Terms of Service 
                 <input
                     name='terms'
-                    value={values.terms}
+                    checked={checked}
                     type='checkbox'
                     onChange={onChange}
                 />
