@@ -25,7 +25,26 @@ describe('Onboarding App', () => {
     })
 
     describe('Form input functionality', () => {
-        
+        it('can type in inputs', () => {
+            nameInput()
+                .should('have.value', '')
+                .type('John Merz')
+                .should('have.value', 'John Merz');
+            
+            emailInput()
+                .should('have.value', '')
+                .type('testemail@aol.com')
+                .should('have.value', 'testemail@aol.com');
+            
+            passwordInput()
+                .should('have.value', '')
+                .type('123456')
+                .should('have.value', '123456');
+            
+            termsInput()
+                .check()
+                .should('have.checked', 'true')
+        })
 
 
     })

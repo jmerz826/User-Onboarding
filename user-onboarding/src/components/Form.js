@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Form = (props) => {
-    const { values, submit, change, disabled, errors, checked, validate } = props;
+    const { values, submit, change, disabled, errors, validate } = props;
 
 
     const onChange = (evt) => {  
@@ -51,7 +51,7 @@ const Form = (props) => {
             <label> Terms of Service 
                 <input
                     name='terms'
-                    checked={checked}
+                    checked={values.terms}
                     type='checkbox'
                     onChange={onChange}
                 />

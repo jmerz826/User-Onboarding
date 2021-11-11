@@ -26,7 +26,14 @@ function App() {
   const [users, setUsers] = useState([]);
   const [disabled, setDisabled] = useState(true);
 
+  const validate = (name, value) => {
+    yup.reach(schema, name).validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
+      .catch(err => setFormErrors({...formErrors, [name]: err.errors[0] }))
+  }
+
   const inputChange = (name, value) => {
+    validate(name, value);
     setFormValues({
       ...formValues, [name]: value
     })
@@ -44,18 +51,14 @@ function App() {
       })
   }
 
-  const validate = (name, value) => {
-    yup.reach(schema, name).validate(value)
-      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
-      .catch(err => setFormErrors({...formErrors, [name]: err.errors[0] }))
-  }
+
 
   const submitForm = () => {
     const newUser = {
       username: formValues.username.trim(),
       email: formValues.email.trim(),
       password: formValues.password,
-      terms: formValues.checked
+      terms: formValues.terms
     }
     postNewUser(newUser);
     setFormValues(initialFormValues);
