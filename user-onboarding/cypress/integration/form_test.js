@@ -56,11 +56,37 @@ describe('Onboarding App', () => {
             termsInput().check();
             submitBtn().click();
             cy.contains('Tim').should('exist');
-            
+
         })
     })
 
+    describe('Form checks for validation', () => {
+        it('can display error messages if data input is invalid', () => {
+            nameInput()
+                .should('have.value', '')
+                .type('q');
+            
+            emailInput()
+                .should('have.value', '')
+                .type('a')
+            
+            passwordInput()
+                .should('have.value', '')
+                .type('12')
+            
+            termsInput()
+                .uncheck()
+            
+            cy.contains('Username needs to be at least 4 characters long').should('exist');
+            cy.contains('Must be valid email!').should('exist');
+            cy.contains('password must be at least 4 characters long').should('exist');
+            cy.contains('Must accept terms of service').should('exist');
 
 
+
+            
+        })
+
+    })
 
 })
