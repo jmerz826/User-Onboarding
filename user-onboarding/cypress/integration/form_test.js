@@ -10,6 +10,7 @@ describe('Onboarding App', () => {
     const emailInput = () => cy.get('input[name=email]');
     const passwordInput = () => cy.get('input[name=password]');
     const termsInput = () => cy.get('input[name=terms]');
+    const submitBtn = () => cy.get('button[id=submit-button]');
 
 
     it('sanity check', () => {
@@ -45,8 +46,18 @@ describe('Onboarding App', () => {
                 .check()
                 .should('have.checked', 'true')
         })
+    })
 
-
+    describe('Form submission should work', () => {
+        it('can submit a new user', () => {
+            nameInput().type('Tim');
+            emailInput().type('test@gmail.com');
+            passwordInput().type('123456');
+            termsInput().check();
+            submitBtn().click();
+            cy.contains('Tim').should('exist');
+            
+        })
     })
 
 

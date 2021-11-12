@@ -56,7 +56,7 @@ const Form = (props) => {
                     onChange={onChange}
                 />
             </label>
-            <button disabled={disabled}>Submit</button>
+            <button disabled={disabled} id='submit-button'>Submit</button>
         </form>
     )
 }
